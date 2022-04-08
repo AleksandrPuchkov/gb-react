@@ -15,7 +15,7 @@ export const Form = () => {
     }
 
     const handleChange = (ev) => {
-        setValue( ev.target.val )
+        setValue( ev.target.value )
     }
 
     return <>

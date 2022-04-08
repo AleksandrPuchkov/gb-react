@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
 import './App.css';
-import { Form } from './components/FormClass/Form'
+import { Form } from './components/FormHW1/Form'
 
 export const App = () => {
   return <>
-  <div className="form" style={{ marginTop: '20px' }}>test div</div>
-  <Form/>
+  <Form />
   </>
 }
+
+// export class AppCl extends Component {
+//   render () {
+//     return <h1>asdsa</h1>
+//   }
+// }
