@@ -18,8 +18,9 @@ export const Form = () => {
 
     return <div className='form'>
         <Message message={message} />
-        <Input value={value} change={handleChange}  />
+
+        {/* <Input value={value} change={handleChange}  />
         <br />
-        <Button click={handleClick} />
+        <Button click={handleClick} /> */}
     </div>
 }
