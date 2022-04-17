@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import './App.css';
-import { Form } from './components/Form.jsx'
+import React from 'react'
+import { Form } from './components/Form/Form'
+import './App.css'
 
- export class App extends Component {
-   render () {
-     return <Form />
-   }
- }
+export const App = () => {
+
+  return <Form />
+
+}
