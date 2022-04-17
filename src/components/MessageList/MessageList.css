@@ -1,9 +1,9 @@
 .message {
     list-style-type: none;
-    margin     : 20px 0px 20px 0px;
-    padding        : 10px;
-    border-radius  : 5px;
-    width          : 200px;
+    margin: 20px 0px 20px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
 }
 
 .usermessage {
@@ -24,7 +24,8 @@
 
 }
 
-.username, .botname {
+.username,
+.botname {
     font-size: 18px;
     font-weight: 700;
 }
@@ -33,11 +34,8 @@
     color: rgb(114, 56, 214)
 }
 
-.botname {
-    
-}
-
-.usertext, .bottext {
+.usertext,
+.bottext {
     font-weight: 100;
     font-size: 14px;
     white-space: nowrap;
