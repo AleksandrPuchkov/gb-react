@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MessageList } from '../MessageList/MessageList';
+import { Button } from '../Button/Button';
 import './Form.css';
 
 export const Form = () => {
@@ -53,9 +54,7 @@ export const Form = () => {
         onChange={(e) => setValue(e.target.value)}
       />
       <br />
-      <button className="submitbutton" type="submit" disabled={disabled}>
-        Отправить
-      </button>
+      <Button disabled={disabled} />
     </form>
   );
 };
