@@ -1,9 +1,7 @@
-import React, { Component } from 'react'
+import React from 'react';
+import { Form } from './components/Form/Form';
 import './App.css';
-import { Form } from './components/FormHW1/Form'
 
- export class App extends Component {
-   render () {
-     return <Form />
-   }
- }
+export const App = () => {
+  return <Form />;
+};

@@ -1,0 +1,6 @@
+.submitbutton {
+    padding: 5px;
+    height: 30px;
+}
+
+.submitbutton:hover {cursor: pointer}
