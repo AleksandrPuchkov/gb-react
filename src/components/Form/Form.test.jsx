@@ -75,6 +75,7 @@ describe('Form', () => {
   //         target: { value: 'TestMessage' },
   //     })
   //     fireEvent.click(screen.getByTestId('submitbutton'))
+  //     screen.debug()
   //     expect(await screen.findByText(/Chatbot/)).toBeInTheDocument
   // })
 });
