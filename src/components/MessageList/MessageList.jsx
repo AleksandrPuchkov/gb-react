@@ -7,15 +7,17 @@ export const MessageList = ({ messages }) => (
       if (message.username === 'Chatbot')
         return (
           <li key={idx} className="message botmessage">
-            <h3 className="botname">{message.username}</h3>{' '}
+            <h3 className="botname">{message.username}</h3>
             <p className="bottext">{message.message}</p>
           </li>
         );
       else
         return (
           <li key={idx} className="message usermessage">
-            <h3 className="username">{message.username}</h3>{' '}
-            <p className="usertext">{message.message}</p>
+            <h3 className="username">{message.username}</h3>
+            <p className="usertext" data-testid="testmessage">
+              {message.message}
+            </p>
           </li>
         );
     })}

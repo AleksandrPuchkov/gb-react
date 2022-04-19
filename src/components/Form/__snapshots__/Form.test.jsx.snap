@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Foasdasdrm render with snapshot 1`] = `
+<DocumentFragment>
+  <form>
+    <ul />
+    <input
+      class="inputusername"
+      data-testid="inputusername"
+      placeholder="Введите имя..."
+      type="text"
+      value=""
+    />
+    <br />
+    <textarea
+      class="inputmessage"
+      placeholder="Введите текст..."
+      type="text"
+    />
+    <br />
+    <button
+      class="submitbutton"
+      data-testid="submitbutton"
+      type="submit"
+    >
+      Отправить
+    </button>
+  </form>
+</DocumentFragment>
+`;
+
+exports[`Form render with snapshot 1`] = `
+<DocumentFragment>
+  <form>
+    <ul />
+    <input
+      class="inputusername"
+      data-testid="inputusername"
+      placeholder="Введите имя..."
+      type="text"
+      value=""
+    />
+    <br />
+    <textarea
+      class="inputmessage"
+      placeholder="Введите текст..."
+      type="text"
+    />
+    <br />
+    <button
+      class="submitbutton"
+      data-testid="submitbutton"
+      type="submit"
+    >
+      Отправить
+    </button>
+  </form>
+</DocumentFragment>
+`;
