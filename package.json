@@ -5,9 +5,11 @@
   "homepage": "https://aleksandrpuchkov.github.io/gb-react/",
   "dependencies": {
     "@babel/runtime": "^7.17.9",
+    "file-loader": "^6.2.0",
     "gh-pages": "^3.2.3",
     "react": "^18.0.0",
-    "react-dom": "^18.0.0"
+    "react-dom": "^18.0.0",
+    "url-loader": "^4.1.1"
   },
   "scripts": {
     "start": "webpack serve --mode=development",
@@ -30,6 +32,8 @@
     "@storybook/addon-essentials": "^5.3.21",
     "@storybook/addon-interactions": "^6.4.22",
     "@storybook/addon-links": "^6.4.22",
+    "@storybook/builder-webpack5": "^6.4.22",
+    "@storybook/manager-webpack5": "^6.4.22",
     "@storybook/react": "^6.4.22",
     "@storybook/testing-library": "^0.0.9",
     "@testing-library/jest-dom": "^5.16.4",
@@ -51,6 +55,7 @@
     "jest": "^27.5.1",
     "prettier": "^2.6.2",
     "style-loader": "^3.3.1",
+    "svg-inline-loader": "^0.8.2",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1"
