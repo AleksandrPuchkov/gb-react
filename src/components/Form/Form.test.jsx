@@ -70,12 +70,12 @@ describe('Form', () => {
   });
 
   it('Bot`s response', async () => {
-      render(<Form />)
-      fireEvent.input(screen.getByPlaceholderText('Введите текст...'), {
-          target: { value: 'TestMessage' },
-      })
-      fireEvent.click(screen.getByTestId('submitbutton'))
-      expect(await screen.findByText('Chatbot', {}, { timeout: 2000 }))
+    render(<Form />);
+    fireEvent.input(screen.getByPlaceholderText('Введите текст...'), {
+      target: { value: 'TestMessage' },
+    });
+    fireEvent.click(screen.getByTestId('submitbutton'));
+    expect(await screen.findByText('Chatbot', {}, { timeout: 2000 }))
       .toBeVisible;
-  })
+  });
 });

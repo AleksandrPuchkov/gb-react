@@ -19,7 +19,6 @@ Primary.args = {
   disabled: false,
 };
 
-
 export const Disabled = Template.bind({});
 Disabled.args = {
   disabled: true,
