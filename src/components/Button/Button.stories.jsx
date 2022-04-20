@@ -6,7 +6,7 @@ export default {
   title: 'SubmitButton',
   component: Button,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    onClick: { action: 'click' },
   },
 };
 
@@ -16,9 +16,9 @@ export const Primary = Template.bind({});
 
 Primary.args = {
   primary: true,
-  // label: 'Submit',
   disabled: false,
 };
+
 
 export const Disabled = Template.bind({});
 Disabled.args = {

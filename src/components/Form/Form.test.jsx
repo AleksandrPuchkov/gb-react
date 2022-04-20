@@ -69,13 +69,13 @@ describe('Form', () => {
     );
   });
 
-  // it('Bot`s response', async () => {
-  //     render(<Form />)
-  //     fireEvent.input(screen.getByPlaceholderText('Введите текст...'), {
-  //         target: { value: 'TestMessage' },
-  //     })
-  //     fireEvent.click(screen.getByTestId('submitbutton'))
-  //     screen.debug()
-  //     expect(await screen.findByText(/Chatbot/)).toBeInTheDocument
-  // })
+  it('Bot`s response', async () => {
+      render(<Form />)
+      fireEvent.input(screen.getByPlaceholderText('Введите текст...'), {
+          target: { value: 'TestMessage' },
+      })
+      fireEvent.click(screen.getByTestId('submitbutton'))
+      expect(await screen.findByText('Chatbot', {}, { timeout: 2000 }))
+      .toBeVisible;
+  })
 });
