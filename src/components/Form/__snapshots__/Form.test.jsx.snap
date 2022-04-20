@@ -12,10 +12,10 @@ exports[`Form render with snapshot 1`] = `
       value=""
     />
     <br />
+    <br />
     <textarea
       class="inputmessage"
       placeholder="Введите текст..."
-      type="text"
     />
     <br />
     <button

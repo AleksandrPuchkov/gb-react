@@ -8,13 +8,13 @@ module.exports = {
         path: path.resolve(__dirname, './build'),
     },
     resolve: {
-        extensions: ['.jsx', '.js']
+        extensions: ['.jsx', '.js', '.tsx', '.ts']
     },
     devtool: 'eval-source-map',
     module: {
         rules: [
             {
-                test: /\.jsx?$/,
+                test: /\.(j|t)sx?$/,
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
@@ -26,9 +26,13 @@ module.exports = {
                 ],
             },
             {
-                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
-                use: 'url-loader'
-            }
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
         ],
     },
     plugins: [

@@ -1,7 +1,12 @@
-import React from 'react';
+import React, { FC, memo } from 'react';
 import './Button.css';
 
-export const Button = ({ disabled }) => (
+interface ButtonProps {
+  disabled: boolean,
+}
+
+export const Button: FC<ButtonProps> = memo(({ disabled }) =>
+(
   <button
     className="submitbutton"
     data-testid="submitbutton"
@@ -10,4 +15,5 @@ export const Button = ({ disabled }) => (
   >
     Отправить
   </button>
+)
 );

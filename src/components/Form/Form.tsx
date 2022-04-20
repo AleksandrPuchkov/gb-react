@@ -1,19 +1,27 @@
-import React, { useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react';
+import { nanoid } from 'nanoid'
 import { MessageList } from '../MessageList/MessageList';
 import { Button } from '../Button/Button';
 import './Form.css';
 
-export const Form = () => {
+interface Message {
+  id: string,
+  username: string,
+  message: string
+}
+
+export const Form: FC = () => {
+
   const [message, setValue] = useState('');
   const [username, setUsername] = useState('');
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useState<Message[]>([]);
   const [disabled, setDisabled] = useState(false);
 
-  const handleSubmitForm = (e) => {
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setMessages([...messages, { username: username, message: message }]);
+    setMessages([...messages, { id: nanoid(), username: username, message: message }]);
     setValue('');
-  };
+  }
 
   useEffect(() => {
     if (
@@ -24,7 +32,7 @@ export const Form = () => {
       const botTimeout = setTimeout(() => {
         setMessages([
           ...messages,
-          { username: 'Chatbot', message: 'Hello from Chatbot!' },
+          { id: nanoid(), username: 'Chatbot', message: 'Hello from Chatbot!' },
         ]);
       }, 1500);
 
@@ -47,10 +55,10 @@ export const Form = () => {
         onChange={(e) => setUsername(e.target.value)}
       />
       <br />
+      <br />
       <textarea
         className="inputmessage"
         placeholder="Введите текст..."
-        type="text"
         value={message}
         onChange={(e) => setValue(e.target.value)}
       />

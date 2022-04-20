@@ -1,7 +1,18 @@
-import React from 'react';
+import React, { FC, memo } from 'react';
+import { nanoid } from 'nanoid';
 import './MessageList.css';
 
-export const MessageList = ({ messages }) => (
+interface Message {
+  id: string,
+  username: string,
+  message: string
+}
+
+interface MessageListProps {
+  messages: Message[] // массив значений Message (объектов) || Array<Message>
+}
+
+export const MessageList: FC<MessageListProps> = memo(({ messages }) => (
   <ul>
     {messages.map((message, idx) => {
       if (message.username === 'Chatbot')
@@ -22,4 +33,4 @@ export const MessageList = ({ messages }) => (
         );
     })}
   </ul>
-);
+));
