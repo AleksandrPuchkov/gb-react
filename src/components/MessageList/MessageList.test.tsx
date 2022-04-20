@@ -2,7 +2,7 @@ import React from 'react';
 import { MessageList } from './MessageList';
 import { render, screen } from '@testing-library/react';
 
-const testmessages = [{ username: 'TestUser', message: 'TestMessage' }];
+const testmessages = [{ id: 'id', username: 'TestUser', message: 'TestMessage' }];
 
 describe('MessageList', () => {
   it('Render component', () => {

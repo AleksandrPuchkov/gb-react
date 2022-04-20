@@ -1,6 +1,7 @@
 import React from 'react';
 import { Form } from './Form';
 import { fireEvent, render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom/extend-expect';
 
 describe('Form', () => {
   it('Render component', () => {
@@ -17,7 +18,7 @@ describe('Form', () => {
     fireEvent.change(screen.getByPlaceholderText('Введите имя...'), {
       target: { value: 'TestUsername' },
     });
-    expect(screen.getByPlaceholderText('Введите имя...').value).toBe(
+    expect(screen.getByPlaceholderText('Введите имя...')).toContainHTML(
       'TestUsername'
     );
   });
@@ -28,7 +29,7 @@ describe('Form', () => {
       target: { value: 'TestUsername' },
     });
     fireEvent.click(screen.getByTestId('submitbutton'));
-    expect(screen.getByPlaceholderText('Введите имя...').value).toBe(
+    expect(screen.getByPlaceholderText('Введите имя...')).toContainHTML(
       'TestUsername'
     );
   });
@@ -61,10 +62,11 @@ describe('Form', () => {
       target: { value: 'TestMessage' },
     });
     fireEvent.click(screen.getByTestId('submitbutton'));
-    expect(screen.getByRole('listitem').firstChild.innerHTML).toBe(
+    if (screen.getByRole('listitem').firstChild) 
+    expect(screen.getByRole('listitem').firstChild).toContainHTML(
       'TestUsername'
     );
-    expect(screen.getByRole('listitem').lastChild.innerHTML).toBe(
+    expect(screen.getByRole('listitem').lastChild).toContainHTML(
       'TestMessage'
     );
   });
