@@ -75,6 +75,7 @@ describe('Form', () => {
       target: { value: 'TestMessage' },
     });
     fireEvent.click(screen.getByTestId('submitbutton'));
-    expect(await screen.findByText('Chatbot', {}, { timeout: 2000 })).toBeVisible;
+    expect(await screen.findByText('Chatbot', {}, { timeout: 2000 }))
+      .toBeVisible;
   });
 });

@@ -33,6 +33,7 @@ module.exports = {
       ],
       'react/prop-types': 0,
       'linebreak-style': 0,
+      '@typescript-eslint/no-var-requires': 0,
       quotes: ['warn', 'single'],
       semi: ['warn', 'always'],
     },
