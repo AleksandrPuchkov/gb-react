@@ -10,7 +10,18 @@ module.exports = {
     resolve: {
         extensions: ['.jsx', '.js', '.tsx', '.ts']
     },
-    devtool: 'eval-source-map',
+    devtool:
+        process.env.NODE_ENV === 'production'
+            ? 'hidden-source-map'
+            : 'eval-source-map',
+    devServer: {
+        compress: true,
+        port: 8000,
+        client: {
+            logging: 'info',
+        },
+        historyApiFallback: true,
+    },
     module: {
         rules: [
             {
