@@ -6,7 +6,7 @@ export default {
   title: 'SubmitButton',
   component: Button,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    onClick: { action: 'click' },
   },
 } as ComponentMeta<typeof Button>
 
