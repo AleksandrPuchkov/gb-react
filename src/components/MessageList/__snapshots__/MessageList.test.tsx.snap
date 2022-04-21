@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`MessageList To match snapshot 1`] = `
+<DocumentFragment>
+  <ul>
+    <li
+      class="message usermessage"
+    >
+      <h3
+        class="username"
+      >
+        TestUser
+      </h3>
+      <p
+        class="usertext"
+        data-testid="testmessage"
+      >
+        TestMessage
+      </p>
+    </li>
+  </ul>
+</DocumentFragment>
+`;
