@@ -40,6 +40,7 @@ export const Form = () => {
       <MessageList messages={messages} />
       <input
         className="inputusername"
+        data-testid="inputusername"
         placeholder="Введите имя..."
         type="text"
         value={username}
