@@ -18,7 +18,7 @@ describe('Form', () => {
     fireEvent.change(screen.getByPlaceholderText('Введите имя...'), {
       target: { value: 'TestUsername' },
     });
-    expect(screen.getByPlaceholderText('Введите имя...')).toContainHTML(
+    expect((screen.getByPlaceholderText('Введите имя...') as HTMLInputElement).value).toBe(
       'TestUsername'
     );
   });
@@ -29,7 +29,7 @@ describe('Form', () => {
       target: { value: 'TestUsername' },
     });
     fireEvent.click(screen.getByTestId('submitbutton'));
-    expect(screen.getByPlaceholderText('Введите имя...')).toContainHTML(
+    expect((screen.getByPlaceholderText('Введите имя...') as HTMLInputElement).value).toBe(
       'TestUsername'
     );
   });
@@ -78,6 +78,6 @@ describe('Form', () => {
     });
     fireEvent.click(screen.getByTestId('submitbutton'));
     expect(await screen.findByText('Chatbot', {}, { timeout: 2000 }))
-      .toBeVisible;
+      .toBeVisible();
   });
 });
