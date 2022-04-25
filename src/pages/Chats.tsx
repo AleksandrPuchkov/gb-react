@@ -1,39 +1,58 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
-import { MessageList } from '../components/MessageList/MessageList';
-import { Button } from '../components/Button/Button';
-import './Chats.css';
+import { MessageList } from '../components/MessageList/MessageList'
+import { Button } from '../components/Button/Button'
+import { ChatList } from '../components/ChatList/ChatList'
+import { Chat, Messages } from '../App'
+import './Chats.css'
 
-interface Message {
-    id: string,
-    username: string,
-    message: string
+interface ChatsProps {
+    chatList: Chat[];
+    messages: Messages;
+    setMessages: React.Dispatch<React.SetStateAction<Messages>>;
+    onAddChat: (chats: Chat) => void;
 }
 
-export const Chats: FC = () => {
+export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddChat }) => {
 
+    const { chatId } = useParams();
     const [message, setValue] = useState('');
     const [username, setUsername] = useState('');
-    const [messages, setMessages] = useState<Message[]>([]);
     const [disabled, setDisabled] = useState(false);
 
     const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        setMessages([...messages, { id: nanoid(), username: username, message: message }]);
+        if (chatId) {
+            setMessages({
+                ...messages, [chatId]: [...messages[chatId],
+                {
+                    id: nanoid(),
+                    username: username,
+                    message: message
+                }]
+            });
+        }
         setValue('');
     }
 
     useEffect(() => {
         if (
-            messages.length &&
-            messages[messages.length - 1].username != 'Chatbot'
+            chatId &&
+            messages[chatId].length &&
+            messages[chatId][messages[chatId].length - 1].username != 'Chatbot'
         ) {
             setDisabled(!disabled);
             const botTimeout = setTimeout(() => {
-                setMessages([
+                setMessages({
                     ...messages,
-                    { id: nanoid(), username: 'Chatbot', message: 'Hello from Chatbot!' },
-                ]);
+                    [chatId]: [...messages[chatId],
+                    {
+                        id: nanoid(),
+                        username: 'Chatbot',
+                        message: 'Greetings from Chatbot!'
+                    }]
+                });
             }, 1500);
 
             return () => {
@@ -43,9 +62,10 @@ export const Chats: FC = () => {
         if (disabled) setDisabled(!disabled);
     }, [messages]);
 
-    return (
+    return (<>
+        <ChatList chatList={chatList} onAddChat={onAddChat} />
         <form onSubmit={handleSubmitForm}>
-            <MessageList messages={messages} />
+            <MessageList messages={chatId ? messages[chatId] : []} />
             <input
                 className="inputusername"
                 data-testid="inputusername"
@@ -65,5 +85,6 @@ export const Chats: FC = () => {
             <br />
             <Button disabled={disabled} />
         </form>
+    </>
     );
 }

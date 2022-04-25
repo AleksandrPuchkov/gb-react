@@ -1,0 +1,17 @@
+.chatList {
+    margin: 0 auto;
+    width: 400px;
+}
+
+.chatList > ul > li {
+    display: inline-block;
+}
+
+.chatTab {
+    display: inline-block;
+    padding: 5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    text-decoration: none;
+    color: black;
+}
