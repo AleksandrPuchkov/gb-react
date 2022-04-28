@@ -1,11 +1,14 @@
 import React, { FC, useMemo, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home } from './pages/Home'
-import { Chats } from './pages/Chats';
+import { Chats } from './pages/Chats/Chats';
 import { Profile } from './pages/Profile'
 import { ChatList } from './components/ChatList/ChatList';
 import { Header } from './components/Header/Header';
 import { nanoid } from 'nanoid';
+import { defaultContext, ThemeContext } from './utils/ThemeContext'
+import { Provider } from 'react-redux'
+import { store } from './store';
 
 const initialMessage: Messages = {
   default: [
@@ -35,6 +38,7 @@ export interface Messages {
 export const App: FC = () => {
 
   const [messages, setMessages] = useState<Messages>(initialMessage);
+  const [theme, setTheme] = useState(defaultContext.theme);
   const chatList = useMemo(
     () =>
       Object.entries(messages).map((chat) => ({
@@ -58,20 +62,33 @@ export const App: FC = () => {
     setMessages({ ...newMessages })
   }
 
-  return <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Header />}>
-        <Route index element={<Home />} />
-        <Route path="profile" element={<Profile />} />
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+  }
 
+  return (
+  <Provider store={store}>
+  <ThemeContext.Provider value={
+    {
+      theme,
+      toggleTheme,
+    }
+  }>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element={<Home />} />
+          <Route path="profile" element={<Profile />} />
+          <Route path="chats">
+            <Route index element={<ChatList chatList={chatList} messages={messages} onDeleteChat={onDeleteChat} onAddChat={onAddChat} />} />
+            <Route path=":chatId" element={<Chats messages={messages} setMessages={setMessages} chatList={chatList} onAddChat={onAddChat} onDeleteChat={onDeleteChat} />} />
+          </Route>
 
-        <Route path="chats">
-          <Route index element={<ChatList chatList={chatList} messages={messages} onDeleteChat={onDeleteChat} onAddChat={onAddChat} />} />
-          <Route path=":chatId" element={<Chats messages={messages} setMessages={setMessages} chatList={chatList} onAddChat={onAddChat} onDeleteChat={onDeleteChat} />} />
         </Route>
-
-      </Route>
-      <Route path="*" element={<h2>404</h2>} />
-    </Routes>
-  </BrowserRouter >
+        <Route path="*" element={<h2>404</h2>} />
+      </Routes>
+    </BrowserRouter >
+  </ThemeContext.Provider>
+  </Provider>
+  )
 };

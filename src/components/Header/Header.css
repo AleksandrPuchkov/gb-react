@@ -1,0 +1,18 @@
+.header {
+    width: 400px;
+    margin: 25px auto;}
+
+.header-list {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-around;
+}
+
+.header-navlink {
+    border: 1px solid #DDD;
+    border-radius: 5px;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: black;
+    transition: background-color 0.8s ease;
+}

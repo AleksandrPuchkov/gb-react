@@ -13,7 +13,6 @@ interface ChatListProps {
 
 export const ChatList: FC<ChatListProps> = ({ chatList, messages, onAddChat, onDeleteChat }) => {
     const [name, setName] = useState('')
-    console.log('CHATLIST RENDER')
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name) {

@@ -1,10 +1,11 @@
 import React, { FC, useState, useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
-import { MessageList } from '../components/MessageList/MessageList'
-import { Button } from '../components/Button/Button'
-import { ChatList } from '../components/ChatList/ChatList'
-import { Chat, Messages } from '../App'
+import { MessageList } from '../../components/MessageList/MessageList'
+import { Button } from '../../components/Button/Button'
+import { ChatList } from '../../components/ChatList/ChatList'
+import { Chat, Messages } from '../../App'
+import { WithClasses } from '../../HOC/WithClasses'
 import './Chats.css'
 
 interface ChatsProps {
@@ -18,10 +19,10 @@ interface ChatsProps {
 export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddChat, onDeleteChat }) => {
 
     const { chatId } = useParams();
+    const MessageListWithClass = WithClasses(MessageList)
     const [message, setValue] = useState('');
     const [username, setUsername] = useState('');
     const [disabled, setDisabled] = useState(false);
-console.log("CHATS RENDER")
     const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (chatId) {
@@ -70,6 +71,7 @@ console.log("CHATS RENDER")
     return (<div className="chatWindow">
         <ChatList chatList={chatList} messages={messages} onAddChat={onAddChat} onDeleteChat={onDeleteChat} />
         <form className="chatForm" onSubmit={handleSubmitForm}>
+            {/* <MessageListWithClass messages={chatId ? messages[chatId] : []} classes={} /> */}
             <MessageList messages={chatId ? messages[chatId] : []} />
             <input
                 className="inputusername"
