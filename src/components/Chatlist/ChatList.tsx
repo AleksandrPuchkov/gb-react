@@ -1,17 +1,19 @@
-import React, { FC, useState } from 'react'
-import { NavLink, Link } from 'react-router-dom'
+import React, { FC, useEffect, useState } from 'react'
+import { NavLink, Link, Navigate } from 'react-router-dom'
 import { nanoid } from 'nanoid'
-import { Chat } from '../../App'
+import { Chat, Messages } from '../../App'
 import './ChatList.css'
 
 interface ChatListProps {
     chatList: Chat[];
-    onAddChat: (chats: Chat) => void
+    messages: Messages;
+    onAddChat: (chats: Chat) => void;
+    onDeleteChat: (chat: string) => void;
 }
 
-export const ChatList: FC<ChatListProps> = ({ chatList, onAddChat }) => {
+export const ChatList: FC<ChatListProps> = ({ chatList, messages, onAddChat, onDeleteChat }) => {
     const [name, setName] = useState('')
-
+    console.log('CHATLIST RENDER')
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name) {
@@ -29,7 +31,11 @@ export const ChatList: FC<ChatListProps> = ({ chatList, onAddChat }) => {
             <ul>
                 {chatList.map((chat) => (
                     <li key={chat.id}>
-                        <NavLink className='chatTab' to={`/chats/${chat.id}`} style={({ isActive }) => ({ backgroundColor: isActive ? '#DDD' : '#FFF', outline: isActive? 'none' : '1px solid #DDD' })}>{chat.name}</NavLink>
+                        <NavLink className='chatTab' to={`/chats/${chat.name}`} style={({ isActive }) => ({ backgroundColor: isActive ? '#DDD' : '#FFF', outline: isActive ? 'none' : '1px solid #DDD' })}>
+                            {chat.name}
+                            <div className='deleteChat' onClick={() => onDeleteChat(chat.name)}>+</div>
+                        </NavLink>
+
                     </li>
                 ))}
             </ul>

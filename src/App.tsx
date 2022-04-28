@@ -1,17 +1,11 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useMemo, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Chats } from './pages/Chats';
 import { Profile } from './pages/Profile'
 import { ChatList } from './components/ChatList/ChatList';
 import { Header } from './components/Header/Header';
-
-const initialChats: Chat[] = [
-  {
-    id: 'default',
-    name: 'chat'
-  }
-]
+import { nanoid } from 'nanoid';
 
 const initialMessage: Messages = {
   default: [
@@ -40,15 +34,28 @@ export interface Messages {
 
 export const App: FC = () => {
 
-  const [chatList, setChatList] = useState<Chat[]>(initialChats)
   const [messages, setMessages] = useState<Messages>(initialMessage);
+  const chatList = useMemo(
+    () =>
+      Object.entries(messages).map((chat) => ({
+        id: nanoid(),
+        name: chat[0],
+      })),
+    [Object.entries(messages).length]
+  );
+
 
   const onAddChat = (chat: Chat) => {
-    setChatList([...chatList, chat])
     setMessages({
       ...messages,
-      [chat.id]: [],
+      [chat.name]: [],
     })
+  }
+
+  const onDeleteChat = (chatName: string) => {
+    const newMessages = { ...messages }
+    delete newMessages[chatName]
+    setMessages({ ...newMessages })
   }
 
   return <BrowserRouter>
@@ -59,8 +66,8 @@ export const App: FC = () => {
 
 
         <Route path="chats">
-          <Route index element={<ChatList chatList={chatList} onAddChat={onAddChat} />} />
-          <Route path=":chatId" element={<Chats messages={messages} setMessages={setMessages} chatList={chatList} onAddChat={onAddChat} />} />
+          <Route index element={<ChatList chatList={chatList} messages={messages} onDeleteChat={onDeleteChat} onAddChat={onAddChat} />} />
+          <Route path=":chatId" element={<Chats messages={messages} setMessages={setMessages} chatList={chatList} onAddChat={onAddChat} onDeleteChat={onDeleteChat} />} />
         </Route>
 
       </Route>

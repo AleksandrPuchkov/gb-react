@@ -1,5 +1,5 @@
 import React, { FC, useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
 import { MessageList } from '../components/MessageList/MessageList'
 import { Button } from '../components/Button/Button'
@@ -12,15 +12,16 @@ interface ChatsProps {
     messages: Messages;
     setMessages: React.Dispatch<React.SetStateAction<Messages>>;
     onAddChat: (chats: Chat) => void;
+    onDeleteChat: (chat: string) => void;
 }
 
-export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddChat }) => {
+export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddChat, onDeleteChat }) => {
 
     const { chatId } = useParams();
     const [message, setValue] = useState('');
     const [username, setUsername] = useState('');
     const [disabled, setDisabled] = useState(false);
-
+console.log("CHATS RENDER")
     const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (chatId) {
@@ -39,7 +40,7 @@ export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddCh
     useEffect(() => {
         if (
             chatId &&
-            messages[chatId].length &&
+            messages[chatId]?.length &&
             messages[chatId][messages[chatId].length - 1].username != 'Chatbot'
         ) {
             setDisabled(!disabled);
@@ -62,9 +63,13 @@ export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddCh
         if (disabled) setDisabled(!disabled);
     }, [messages]);
 
-    return (<>
-        <ChatList chatList={chatList} onAddChat={onAddChat} />
-        <form onSubmit={handleSubmitForm}>
+    if (!chatList.find((chat) => chat.name === chatId)) {
+        return <Navigate replace to="/chats" />
+    }
+
+    return (<div className="chatWindow">
+        <ChatList chatList={chatList} messages={messages} onAddChat={onAddChat} onDeleteChat={onDeleteChat} />
+        <form className="chatForm" onSubmit={handleSubmitForm}>
             <MessageList messages={chatId ? messages[chatId] : []} />
             <input
                 className="inputusername"
@@ -85,6 +90,6 @@ export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddCh
             <br />
             <Button disabled={disabled} />
         </form>
-    </>
+    </div>
     );
 }

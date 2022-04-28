@@ -1,11 +1,19 @@
-form {
-    background-color: #DDD;
-    padding         : 15px;
-    margin          : 0 auto;
-    width           : 400px;
+.chatWindow {
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
 }
 
-.inputusername, .inputmessage {
+.chatForm {
+    background-color: #DDD;
+    padding: 15px;
+    margin: 0 auto;
+    width: 370px;
+}
+
+.inputusername,
+.inputmessage {
     padding: 5px;
     height: 20px;
     border-radius: 5px;
@@ -13,7 +21,7 @@ form {
 }
 
 .inputmessage {
-    width: 390px;
+    width: 360px;
     height: 100px;
 
 }

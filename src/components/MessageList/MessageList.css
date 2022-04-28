@@ -43,7 +43,7 @@
 
 .botmessage {
     position: relative;
-    margin-left: calc(40% + 20px);
+    margin-left: 40%;
     background-color: rgb(240, 240, 240);
 }
 

@@ -1,6 +1,11 @@
 .chatList {
-    margin: 0 auto;
+    margin: 0 auto; 
     width: 400px;
+}
+
+.chatList > ul {
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .chatList > ul > li {
@@ -14,4 +19,15 @@
     border-top-right-radius: 5px;
     text-decoration: none;
     color: black;
+    transition: transform 0.2s ease;
+}
+
+.chatTab:active {
+    transform: scale(1.2);
+}
+
+.deleteChat {
+    display: inline-block;
+    margin-left: 5px;
+    transform: rotate(45deg);
 }
