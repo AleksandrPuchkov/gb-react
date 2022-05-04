@@ -8,7 +8,11 @@ module.exports = {
         path: path.resolve(__dirname, './build'),
     },
     resolve: {
-        extensions: ['.jsx', '.js', '.tsx', '.ts']
+        extensions: ['.jsx', '.js', '.tsx', '.ts'],
+        alias: {
+            components: path.resolve(__dirname, 'src/components/'),
+            src: path.resolve(__dirname, 'src/'),
+        }
     },
     devtool:
         process.env.NODE_ENV === 'production'
@@ -30,11 +34,23 @@ module.exports = {
                 use: ['babel-loader'],
             },
             {
-                test: /\.css?$/i,
+                test: /\.css$/,
                 use: [
-                    'style-loader',
-                    'css-loader'
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            importLoaders: 1,
+                            modules: true,
+                        },
+                    },
                 ],
+                include: /\.module\.css$/,
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
+                exclude: /\.module\.css$/,
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,

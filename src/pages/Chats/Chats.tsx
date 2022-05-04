@@ -1,11 +1,11 @@
 import React, { FC, useState, useEffect } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import { nanoid } from 'nanoid'
-import { MessageList } from '../../components/MessageList/MessageList'
-import { Button } from '../../components/Button/Button'
-import { ChatList } from '../../components/ChatList/ChatList'
-import { Chat, Messages } from '../../App'
-import { WithClasses } from '../../HOC/WithClasses'
+import { MessageList } from 'components/MessageList/MessageList'
+import { Button } from 'components/Button/Button'
+import { ChatList } from 'components/ChatList/ChatList'
+import { Chat, Messages } from 'src/App'
+import { WithClasses } from 'src/HOC/WithClasses'
 import './Chats.css'
 
 interface ChatsProps {
