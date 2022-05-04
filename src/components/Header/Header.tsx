@@ -1,5 +1,6 @@
 import React, { FC } from 'react'
 import { Outlet, Link, NavLink } from 'react-router-dom'
+import './Header.css'
 
 const navigate = [
     {
@@ -21,11 +22,17 @@ const navigate = [
 
 export const Header: FC = () => {
     return <>
-        <header>
-            <ul>
+        <header className="header">
+            <ul className='header-list'>
                 {navigate.map((link) => (
-                    <li key={link.id}><NavLink to={link.to} style={({ isActive }) => ({ color: isActive ? 'green' : 'blue' })}
-                    >{link.name}</NavLink><br /></li>
+                    <li key={link.id}>
+                        <NavLink className="header-navlink" to={link.to} style={({ isActive }) => ({
+                            backgroundColor: isActive ? '#BBB' : '#FFF',
+                            color: isActive ? 'white' : 'black',
+                            boxShadow: isActive ? '0px 0px 8px #BBB' : 'none',
+                        })}
+                        >{link.name}</NavLink><br />
+                    </li>
                 ))}
             </ul>
             <main>
