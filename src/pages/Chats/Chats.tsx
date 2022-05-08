@@ -1,80 +1,69 @@
-import React, { FC, useState, useEffect } from 'react'
+import React, { FC, useState } from 'react'
 import { Navigate, useParams } from 'react-router-dom'
-import { nanoid } from 'nanoid'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { MessageList } from 'components/MessageList/MessageList'
 import { Button } from 'components/Button/Button'
 import { ChatList } from 'components/ChatList/ChatList'
-import { Chat, Messages } from 'src/App'
 import { WithClasses } from 'src/HOC/WithClasses'
-import './Chats.css'
+import { selectChatList, selectChats } from 'src/store/chats/selectors'
+import { addMessage } from 'src/store/chats/actions'
+import './Chats.less'
 
-interface ChatsProps {
-    chatList: Chat[];
-    messages: Messages;
-    setMessages: React.Dispatch<React.SetStateAction<Messages>>;
-    onAddChat: (chats: Chat) => void;
-    onDeleteChat: (chat: string) => void;
-}
-
-export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddChat, onDeleteChat }) => {
+export const Chats: FC = () => {
 
     const { chatId } = useParams();
+    const dispatch = useDispatch()
+    const chats = useSelector(selectChats)
+    const chatList = useSelector(selectChatList, shallowEqual)
     const MessageListWithClass = WithClasses(MessageList)
     const [message, setValue] = useState('');
     const [username, setUsername] = useState('');
     const [disabled, setDisabled] = useState(false);
+
     const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (chatId) {
-            setMessages({
-                ...messages, [chatId]: [...messages[chatId],
-                {
-                    id: nanoid(),
-                    username: username,
-                    message: message
-                }]
-            });
+            dispatch(addMessage(chatId, message))
         }
         setValue('');
     }
 
-    useEffect(() => {
-        if (
-            chatId &&
-            messages[chatId]?.length &&
-            messages[chatId][messages[chatId].length - 1].username != 'Chatbot'
-        ) {
-            setDisabled(!disabled);
-            const botTimeout = setTimeout(() => {
-                setMessages({
-                    ...messages,
-                    [chatId]: [...messages[chatId],
-                    {
-                        id: nanoid(),
-                        username: 'Chatbot',
-                        message: 'Greetings from Chatbot!'
-                    }]
-                });
-            }, 1500);
+    // useEffect(() => {
+    //     if (
+    //         chatId &&
+    //         messages[chatId]?.length &&
+    //         messages[chatId][messages[chatId].length - 1].username != 'Chatbot'
+    //     ) {
+    //         setDisabled(!disabled);
+    //         const botTimeout = setTimeout(() => {
+    //             setMessages({
+    //                 ...messages,
+    //                 [chatId]: [...messages[chatId],
+    //                 {
+    //                     id: nanoid(),
+    //                     username: 'Chatbot',
+    //                     message: 'Greetings from Chatbot!'
+    //                 }]
+    //             });
+    //         }, 1500);
 
-            return () => {
-                clearTimeout(botTimeout);
-            };
-        }
-        if (disabled) setDisabled(!disabled);
-    }, [messages]);
+    //         return () => {
+    //             clearTimeout(botTimeout);
+    //         };
+    //     }
+    //     if (disabled) setDisabled(!disabled);
+    // }, [messages]);
 
     if (!chatList.find((chat) => chat.name === chatId)) {
         return <Navigate replace to="/chats" />
     }
 
-    return (<div className="chatWindow">
-        <ChatList chatList={chatList} messages={messages} onAddChat={onAddChat} onDeleteChat={onDeleteChat} />
-        <form className="chatForm" onSubmit={handleSubmitForm}>
-            {/* <MessageListWithClass messages={chatId ? messages[chatId] : []} classes={} /> */}
-            <MessageList messages={chatId ? messages[chatId] : []} />
+    return (<div className="chat">
+        <ChatList />
+        <form className="chat-form" onSubmit={handleSubmitForm}>
+            <MessageList messages={chatId ? chats[chatId] : []} />
             <input
-                className="inputusername"
+                className="chat-form-inputusername"
                 data-testid="inputusername"
                 placeholder="Введите имя..."
                 type="text"
@@ -84,7 +73,7 @@ export const Chats: FC<ChatsProps> = ({ chatList, messages, setMessages, onAddCh
             <br />
             <br />
             <textarea
-                className="inputmessage"
+                className="chat-form-inputmessage"
                 placeholder="Введите текст..."
                 value={message}
                 onChange={(e) => setValue(e.target.value)}

@@ -1,0 +1,59 @@
+.message {
+    list-style-type: none;
+    margin: 20px 0px 20px 0px;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+}
+
+.usermessage {
+    background-color: rgb(161, 234, 143);
+    position: relative;
+
+    &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        transform: rotate(45deg);
+        left: -5px;
+        bottom: 8px;
+        height: 10px;
+        width: 10px;
+        background-color: rgb(161, 234, 143);
+    }
+}
+
+.username,
+.botname {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.username {
+    color: rgb(114, 56, 214)
+}
+
+.usertext,
+.bottext {
+    font-weight: 100;
+    font-size: 14px;
+    white-space: nowrap;
+}
+
+.botmessage {
+    position: relative;
+    margin-left: 40%;
+    background-color: rgb(240, 240, 240);
+
+    &::before {
+        content: "";
+        position: absolute;
+        display: block;
+        transform: rotate(45deg);
+        left: 215px;
+        bottom: 8px;
+        height: 10px;
+        width: 10px;
+        background-color: rgb(240, 240, 240);
+    }
+}

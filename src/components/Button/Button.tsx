@@ -1,5 +1,5 @@
 import React, { FC, memo } from 'react';
-import './Button.css';
+import './Button.less';
 
 interface ButtonProps {
   disabled: boolean,

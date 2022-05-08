@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Outlet, Link, NavLink } from 'react-router-dom'
-import './Header.css'
+import './Header.less'
 
 const navigate = [
     {
@@ -17,6 +17,11 @@ const navigate = [
         id: 3,
         to: '/chats',
         name: 'Chats'
+    },
+    {
+        id: 4,
+        to: '/about',
+        name: 'About'
     },
 ]
 

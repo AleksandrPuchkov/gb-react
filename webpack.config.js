@@ -53,6 +53,10 @@ module.exports = {
                 exclude: /\.module\.css$/,
             },
             {
+                test: /\.less$/,
+                use: ['style-loader', 'css-loader', 'less-loader']
+            },
+            {
                 test: /\.(png|jpe?g|gif)$/i,
                 use: [
                     {

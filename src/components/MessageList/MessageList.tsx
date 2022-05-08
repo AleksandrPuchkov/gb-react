@@ -1,6 +1,5 @@
 import React, { FC, memo } from 'react';
-import { nanoid } from 'nanoid';
-import './MessageList.css';
+import './MessageList.less';
 
 interface Message {
   id: string,
@@ -9,7 +8,7 @@ interface Message {
 }
 
 interface MessageListProps {
-  messages: Message[] // массив значений Message (объектов) || Array<Message>
+  messages: Message[]
 }
 
 export const MessageList: FC<MessageListProps> = memo(({ messages }) => (
