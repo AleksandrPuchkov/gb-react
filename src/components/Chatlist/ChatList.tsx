@@ -1,26 +1,18 @@
-import React, { FC, useEffect, useState } from 'react'
-import { NavLink, Link, Navigate } from 'react-router-dom'
-import { nanoid } from 'nanoid'
-import { Chat, Messages } from '../../App'
-import './ChatList.css'
+import React, { FC, useState } from 'react'
+import { NavLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { addChat, deleteChat } from 'src/store/chats/actions'
+import { selectChatList } from 'src/store/chats/selectors'
+import './ChatList.less'
 
-interface ChatListProps {
-    chatList: Chat[];
-    messages: Messages;
-    onAddChat: (chats: Chat) => void;
-    onDeleteChat: (chat: string) => void;
-}
-
-export const ChatList: FC<ChatListProps> = ({ chatList, messages, onAddChat, onDeleteChat }) => {
+export const ChatList: FC = () => {
     const [name, setName] = useState('')
+    const dispatch = useDispatch()
+    const chatList = useSelector(selectChatList, (prev, next) => prev.length === next.length)
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
         if (name) {
-            onAddChat(
-                {
-                    id: nanoid(),
-                    name,
-                })
+            dispatch(addChat(name))
             setName('')
         }
     }
@@ -30,11 +22,10 @@ export const ChatList: FC<ChatListProps> = ({ chatList, messages, onAddChat, onD
             <ul>
                 {chatList.map((chat) => (
                     <li key={chat.id}>
-                        <NavLink className='chatTab' to={`/chats/${chat.name}`} style={({ isActive }) => ({ backgroundColor: isActive ? '#DDD' : '#FFF', outline: isActive ? 'none' : '1px solid #DDD' })}>
+                        <NavLink className='chatList-tab' to={`/chats/${chat.name}`} style={({ isActive }) => ({ backgroundColor: isActive ? '#DDD' : '#FFF', outline: isActive ? 'none' : '1px solid #DDD' })}>
                             {chat.name}
-                            <div className='deleteChat' onClick={() => onDeleteChat(chat.name)}>+</div>
+                            <div className='deleteChat' onClick={() => dispatch(deleteChat(chat.name))}>+</div>
                         </NavLink>
-
                     </li>
                 ))}
             </ul>

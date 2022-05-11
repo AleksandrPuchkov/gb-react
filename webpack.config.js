@@ -8,11 +8,11 @@ module.exports = {
         path: path.resolve(__dirname, './build'),
     },
     resolve: {
-        extensions: ['.jsx', '.js', '.tsx', '.ts'],
         alias: {
-            components: path.resolve(__dirname, 'src/components/'),
-            src: path.resolve(__dirname, 'src/'),
-        }
+            components: path.resolve(__dirname, 'src/components'),
+            src: path.resolve(__dirname, 'src'),
+        },
+        extensions: ['.jsx', '.js', '.tsx', '.ts'],
     },
     devtool:
         process.env.NODE_ENV === 'production'
@@ -33,24 +33,57 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ['babel-loader'],
             },
+            // {
+            //     test: /\.css$/,
+            //     use: [
+            //         "style-loader",
+            //         {
+            //             loader: "css-loader",
+            //             options: {
+            //                 importLoaders: 1,
+            //                 modules: true,
+            //             },
+            //         },
+            //     ],
+            //     include: /\.module\.css$/,
+            // },
+            // {
+            //     test: /\.css$/,
+            //     use: ["style-loader", "css-loader"],
+            //     exclude: /\.module\.css$/,
+            // },
             {
-                test: /\.css$/,
+                test: /\.(le|c)ss$/i,
+                exclude: /\.module\.(le|c)ss/i,
                 use: [
-                    "style-loader",
+                    'style-loader',
                     {
-                        loader: "css-loader",
+                        loader: 'css-loader',
                         options: {
-                            importLoaders: 1,
-                            modules: true,
+                            modules: {
+                                mode: 'icss',
+                                localIdentName: '[name]___[hash:base64:5]'
+                            },
                         },
                     },
-                ],
-                include: /\.module\.css$/,
+                    'less-loader'
+                ]
             },
             {
-                test: /\.css$/,
-                use: ["style-loader", "css-loader"],
-                exclude: /\.module\.css$/,
+                test: /\.module\.(le|c)ss$/i,
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            modules: {
+                                mode: 'local',
+                                localIdentName: '[name]___[hash:base64:5]',
+                            },
+                        },
+                    },
+                    'less-loader'
+                ]
             },
             {
                 test: /\.(png|jpe?g|gif)$/i,
