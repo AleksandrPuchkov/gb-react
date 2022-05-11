@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { Chats } from './pages/Chats/Chats';
 import { Profile } from './pages/Profile'
-import { ChatList } from './components/ChatList/ChatList';
+import { ChatList } from './components/Chatlist/ChatList';
 import { Header } from './components/Header/Header';
 import { defaultContext, ThemeContext } from './utils/ThemeContext'
 import { AboutWithConnect } from './pages/About';
