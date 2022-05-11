@@ -19,7 +19,6 @@ exports[`Form render with snapshot 1`] = `
     />
     <br />
     <button
-      class="submitbutton"
       data-testid="submitbutton"
       type="submit"
     >

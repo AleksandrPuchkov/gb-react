@@ -4,15 +4,12 @@ exports[`MessageList To match snapshot 1`] = `
 <DocumentFragment>
   <ul>
     <li
-      class="message usermessage"
+      class="undefined undefined"
     >
-      <h3
-        class="username"
-      >
+      <h3>
         TestUser
       </h3>
       <p
-        class="usertext"
         data-testid="testmessage"
       >
         TestMessage

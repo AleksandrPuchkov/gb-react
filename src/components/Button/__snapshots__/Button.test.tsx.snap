@@ -3,7 +3,6 @@
 exports[`Button render with snapshot 1`] = `
 <DocumentFragment>
   <button
-    class="submitbutton"
     data-testid="submitbutton"
     disabled=""
     type="submit"
