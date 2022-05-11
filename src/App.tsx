@@ -16,7 +16,6 @@ export const App: FC = () => {
   }
 
   return (
-    
       <ThemeContext.Provider value={
         {
           theme,
@@ -33,7 +32,6 @@ export const App: FC = () => {
                 <Route path=":chatId" element={<Chats />} />
               </Route>
               <Route path="about" element={<AboutWithConnect />} />
-
             </Route>
             <Route path="*" element={<h2>404</h2>} />
           </Routes>

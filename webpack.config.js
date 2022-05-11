@@ -8,11 +8,11 @@ module.exports = {
         path: path.resolve(__dirname, './build'),
     },
     resolve: {
-        extensions: ['.jsx', '.js', '.tsx', '.ts'],
         alias: {
-            components: path.resolve(__dirname, 'src/components/'),
-            src: path.resolve(__dirname, 'src/'),
-        }
+            components: path.resolve(__dirname, 'src/components'),
+            src: path.resolve(__dirname, 'src'),
+        },
+        extensions: ['.jsx', '.js', '.tsx', '.ts'],
     },
     devtool:
         process.env.NODE_ENV === 'production'
