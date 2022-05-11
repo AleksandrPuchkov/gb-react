@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { Outlet, Link, NavLink } from 'react-router-dom'
-import './Header.less'
+import style from './Header.module.less'
 
 const navigate = [
     {
@@ -27,11 +27,11 @@ const navigate = [
 
 export const Header: FC = () => {
     return <>
-        <header className="header">
-            <ul className='header-list'>
+        <header className={style.header}>
+            <ul className={style.headerList}>
                 {navigate.map((link) => (
                     <li key={link.id}>
-                        <NavLink className="header-navlink" to={link.to} style={({ isActive }) => ({
+                        <NavLink className={style.headerNavlink} to={link.to} style={({ isActive }) => ({
                             backgroundColor: isActive ? '#BBB' : '#FFF',
                             color: isActive ? 'white' : 'black',
                             boxShadow: isActive ? '0px 0px 8px #BBB' : 'none',
