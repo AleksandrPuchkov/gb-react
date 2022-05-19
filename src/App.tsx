@@ -1,12 +1,9 @@
-import React, { FC, useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { Home } from './pages/Home'
-import { Chats } from './pages/Chats/Chats';
-import { Profile } from './pages/Profile'
-import { ChatList } from './components/Chatlist/ChatList';
-import { Header } from './components/Header/Header';
+import React, { FC, useState } from 'react'
+import { Provider } from 'react-redux'
 import { defaultContext, ThemeContext } from './utils/ThemeContext'
-import { AboutWithConnect } from './pages/About';
+import { AppRouter } from './components/AppRouter'
+import { persistor, store } from './store'
+import { PersistGate } from 'redux-persist/integration/react'
 
 export const App: FC = () => {
   const [theme, setTheme] = useState(defaultContext.theme);
@@ -16,26 +13,17 @@ export const App: FC = () => {
   }
 
   return (
-      <ThemeContext.Provider value={
-        {
-          theme,
-          toggleTheme,
-        }
-      }>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Header />}>
-              <Route index element={<Home />} />
-              <Route path="profile" element={<Profile />} />
-              <Route path="chats">
-                <Route index element={<ChatList />} />
-                <Route path=":chatId" element={<Chats />} />
-              </Route>
-              <Route path="about" element={<AboutWithConnect />} />
-            </Route>
-            <Route path="*" element={<h2>404</h2>} />
-          </Routes>
-        </BrowserRouter >
-      </ThemeContext.Provider>
+    <ThemeContext.Provider value={
+      {
+        theme,
+        toggleTheme,
+      }
+    }>
+      <Provider store={store}>
+        <PersistGate persistor={persistor}>
+          <AppRouter />
+        </PersistGate>
+      </Provider>
+    </ThemeContext.Provider>
   )
 };

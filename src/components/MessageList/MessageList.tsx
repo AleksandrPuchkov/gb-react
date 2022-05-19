@@ -4,7 +4,7 @@ import style from './MessageList.module.less';
 interface Message {
   id: string,
   username: string,
-  message: string
+  text: string
 }
 
 interface MessageListProps {
@@ -12,8 +12,6 @@ interface MessageListProps {
 }
 
 export const MessageList: FC<MessageListProps> = memo(({ messages }) => {
-  
-  console.log(style)
   return (
   <ul>
     {messages.map((message, idx) => {
@@ -21,7 +19,7 @@ export const MessageList: FC<MessageListProps> = memo(({ messages }) => {
         return (
           <li key={idx} className={`${style.message} ${style.botmessage}`}>
             <h3 className={style.botname}>{message.username}</h3>
-            <p className={style.bottext}>{message.message}</p>
+            <p className={style.bottext}>{message.text}</p>
           </li>
         );
       else
@@ -29,7 +27,7 @@ export const MessageList: FC<MessageListProps> = memo(({ messages }) => {
           <li key={idx} className={`${style.message} ${style.usermessage}`}>
             <h3 className={style.username}>{message.username}</h3>
             <p className={style.usertext} data-testid="testmessage">
-              {message.message}
+              {message.text}
             </p>
           </li>
         );
