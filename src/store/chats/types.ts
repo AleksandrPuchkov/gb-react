@@ -27,5 +27,3 @@ export type AddMessage = (chatId: string, message: Message) => {
     chatId: string, 
     message: Message
 }
-
-// export type AddMessageWithReply = (chatId: string, message: Message) => (dispatch: Dispatch) => void
