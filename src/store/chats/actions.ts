@@ -1,4 +1,5 @@
-import { AddChat, AddMessage, DeleteChat } from "./types"
+import { Dispatch } from "redux"
+import { AddChat, AddMessage, DeleteChat, Message } from "./types"
 
 export const ADD_CHAT = 'CHATS::ADD_CHAT'
 export const DELETE_CHAT = 'CHATS::DELETE_CHAT'
@@ -19,3 +20,18 @@ export const addMessage: AddMessage = (chatId, message) => ({
     chatId,
     message
 })
+
+let timeout: NodeJS.Timeout
+
+export const addMessageWithReply = (chatId: string, message: Message) => (dispatch: Dispatch) => {
+    dispatch(addMessage(chatId, message))
+    if (message.username !== 'Chatbot') {
+        if (timeout) { clearTimeout(timeout) }
+        timeout = setTimeout(() => {
+            dispatch(addMessage(chatId, {
+                text: 'Greeting from Chatbot!',
+                username: 'Chatbot'
+            }))
+        }, 1000)
+    }
+}
